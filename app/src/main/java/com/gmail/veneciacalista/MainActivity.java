@@ -19,13 +19,14 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listView;
 
+//    ArrayList<Movie> arrayList = new ArrayList<>();
     ArrayList<String> arrayList = new ArrayList<>();
 
     public static String BaseUrl = "https://api.themoviedb.org/3/";
     private TextView textViewResult;
 
 
-    @Override
+    @Override //ambil dari parent kek super
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -64,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
 //                    arrayList.add(stringBuilder);
 
                     for (Movie movie : movieResponse.results) {
+//                        arrayList.add(movie);
                         arrayList.add(movie.getTitle());
                     }
-//                    textViewResult.setText(stringBuilder);
 
                     ArrayAdapter arrayAdapter=new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
                     listView.setAdapter(arrayAdapter);
