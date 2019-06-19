@@ -1,13 +1,16 @@
 package com.gmail.veneciacalista;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
-@Entity
-public class Movie {
-    public Movie(int vote_count, int id, boolean video, float vote_average, String title, float popularity, String poster_path, String original_language, String original_title, int[] genre_ids, String backdrop_path, boolean adult, String overview, String release_date) {
+import java.io.Serializable;
+
+@Entity(tableName = Constants.TABLE_NAME_MOVIE)
+public class Movie implements Serializable {
+    public Movie(int vote_count, int id, boolean video, float vote_average, String title, float popularity, String poster_path, String original_language, String original_title, String backdrop_path, boolean adult, String overview, String release_date) {
         this.vote_count = vote_count;
         this.id = id;
         this.video = video;
@@ -27,8 +30,8 @@ public class Movie {
     @SerializedName("vote_count")
     private int vote_count;
 
-    @PrimaryKey
     @SerializedName("ID")
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     @SerializedName("video")
@@ -52,6 +55,7 @@ public class Movie {
     @SerializedName("original_title")
     private String original_title;
 
+    @Ignore
     @SerializedName("genre_ids")
     private int[] genre_ids;
 
@@ -66,6 +70,62 @@ public class Movie {
 
     @SerializedName("release_date")
     private String release_date;
+
+    public void setVote_count(int vote_count) {
+        this.vote_count = vote_count;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setVideo(boolean video) {
+        this.video = video;
+    }
+
+    public void setVote_average(float vote_average) {
+        this.vote_average = vote_average;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPopularity(float popularity) {
+        this.popularity = popularity;
+    }
+
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
+    }
+
+    public void setOriginal_language(String original_language) {
+        this.original_language = original_language;
+    }
+
+    public void setOriginal_title(String original_title) {
+        this.original_title = original_title;
+    }
+
+    public void setGenre_ids(int[] genre_ids) {
+        this.genre_ids = genre_ids;
+    }
+
+    public void setBackdrop_path(String backdrop_path) {
+        this.backdrop_path = backdrop_path;
+    }
+
+    public void setAdult(boolean adult) {
+        this.adult = adult;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
+    }
 
     public int getVote_count() {
         return vote_count;

@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,9 +23,12 @@ public class MainActivity extends AppCompatActivity {
 //    ArrayList<Movie> arrayList = new ArrayList<>();
     ArrayList<String> arrayList = new ArrayList<>();
 
+    private MovieDatabase movieDatabase;
+    private Movie movie;
+
     public static String BaseUrl = "https://api.themoviedb.org/3/";
     private TextView textViewResult;
-
+    MovieDatabase appDb = MovieDatabase.getInstance(this);
 
     @Override //ambil dari parent kek super
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,13 @@ public class MainActivity extends AppCompatActivity {
 
 //        arrayList.add("hahaha");
 
-        getMovie();
+        boolean roomStatus = checkRoom();
+
+//        arrayList.add("-->" + roomStatus);
+        if (roomStatus) {
+            getMovie();
+        }
+        addToArray();
 
     }
 
@@ -61,17 +71,33 @@ public class MainActivity extends AppCompatActivity {
                     assert movieResponse != null;
 
 //                    String stringBuilder = "--->" + movieResponse.results.get(0).getTitle();
-//
-//                    arrayList.add(stringBuilder);
 
+                    appDb.getMovieDao().delete();
+                    int i = 0;
                     for (Movie movie : movieResponse.results) {
-//                        arrayList.add(movie);
-                        arrayList.add(movie.getTitle());
+                        i++;
+                        appDb.getMovieDao().insert(
+                                new Movie(
+                                        movie.getVote_count(),
+                                        movie.getId(),
+                                        movie.isVideo(),
+                                        movie.getVote_average(),
+                                        movie.getTitle(),
+                                        movie.getPopularity(),
+                                        movie.getPoster_path(),
+                                        movie.getOriginal_language(),
+                                        movie.getOriginal_title(),
+                                        movie.getBackdrop_path(),
+                                        movie.isAdult(),
+                                        movie.getOverview(),
+                                        movie.getRelease_date()
+                                )
+                        );
+//                        arrayList.add("test" + i);
+
                     }
-
-                    ArrayAdapter arrayAdapter=new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
-                    listView.setAdapter(arrayAdapter);
-
+//                    ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+//                    listView.setAdapter(arrayAdapter);
                 }
             }
 
@@ -82,5 +108,29 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+    }
+
+    private void addToArray() {
+        List<Movie> movieList = appDb.getMovieDao().getAll();
+        String stringBuilder = "--->" + movieList.size();
+
+//        textViewResult.setText(stringBuilder);
+//        arrayList.add(stringBuilder);
+
+        for (Movie movie : movieList) {
+            arrayList.add(movie.getTitle());
+        }
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
+        listView.setAdapter(arrayAdapter);
+    }
+
+    private boolean checkRoom() {
+        if (appDb.getMovieDao().getAll().size() != 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
