@@ -16,24 +16,27 @@ android:orientation="vertical">
         android:layout_height="match_parent"
         tools:openDrawer="start">
 
-        <include
-        layout="@layout/app_bar_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <!--<include-->
+        <!--layout="@layout/app_bar_main"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
-        <android.support.design.widget.NavigationView
-            android:id="@+id/nav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:headerLayout="@layout/nav_header_main"
-            app:menu="@menu/activity_main_drawer" />
+        <!--<android.support.design.widget.NavigationView-->
+            <!--android:id="@+id/nav_view"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="start"-->
+            <!--app:headerLayout="@layout/nav_header_main"-->
+            <!--app:menu="@menu/activity_main_drawer" />-->
+
+        <include
+            layout="@layout/recycle_view"/>
 
         <ListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="60dp"/>
 
         <TextView
             android:id="@+id/text_view_result"

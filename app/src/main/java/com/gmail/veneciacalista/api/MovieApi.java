@@ -1,4 +1,6 @@
-package com.gmail.veneciacalista;
+package com.gmail.veneciacalista.api;
+
+import com.gmail.veneciacalista.dao.model.MovieResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

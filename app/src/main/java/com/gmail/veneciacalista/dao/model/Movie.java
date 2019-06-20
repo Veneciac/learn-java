@@ -1,9 +1,10 @@
-package com.gmail.veneciacalista;
+package com.gmail.veneciacalista.dao.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.gmail.veneciacalista.helper.Constants;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;

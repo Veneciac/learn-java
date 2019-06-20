@@ -1,4 +1,4 @@
-package com.gmail.veneciacalista;
+package com.gmail.veneciacalista.helper;
 
 final public class Constants {
     private Constants() {

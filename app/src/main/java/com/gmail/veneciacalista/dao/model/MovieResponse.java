@@ -1,4 +1,4 @@
-package com.gmail.veneciacalista;
+package com.gmail.veneciacalista.dao.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -21,11 +21,5 @@ public class MovieResponse {
     public Dates dates;
 }
 
- class Dates {
-    @SerializedName("maximum")
-    public String maximum;
 
-    @SerializedName("minimum")
-    public String minimum;
-}
 

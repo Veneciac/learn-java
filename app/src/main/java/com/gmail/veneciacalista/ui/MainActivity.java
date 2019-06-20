@@ -1,13 +1,20 @@
-package com.gmail.veneciacalista;
+package com.gmail.veneciacalista.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.gmail.veneciacalista.R;
+import com.gmail.veneciacalista.api.MovieApi;
+import com.gmail.veneciacalista.dao.MovieDatabase;
+import com.gmail.veneciacalista.dao.model.Movie;
+import com.gmail.veneciacalista.dao.model.MovieResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     ListView listView;
+    RecyclerView recyclerView;
 
 //    ArrayList<Movie> arrayList = new ArrayList<>();
     ArrayList<String> arrayList = new ArrayList<>();
@@ -38,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Find the toolbar view inside the activity layout
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // Sets the Toolbar to act as the ActionBar for this Activity window.
-        // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
         textViewResult = findViewById(R.id.text_view_result);
 
         listView = (ListView)findViewById(R.id.listview);
+
+        recyclerView = (RecyclerView)findViewById(R.id.rvMovie);
 
 //        arrayList.add("hahaha");
 
@@ -85,8 +92,6 @@ public class MainActivity extends AppCompatActivity {
                     MovieResponse movieResponse = response.body();
                     assert movieResponse != null;
 
-//                    String stringBuilder = "--->" + movieResponse.results.get(0).getTitle();
-
                     appDb.getMovieDao().delete();
                     int i = 0;
                     for (Movie movie : movieResponse.results) {
@@ -108,11 +113,7 @@ public class MainActivity extends AppCompatActivity {
                                         movie.getRelease_date()
                                 )
                         );
-//                        arrayList.add("test" + i);
-
                     }
-//                    ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
-//                    listView.setAdapter(arrayAdapter);
                 }
             }
 
@@ -129,9 +130,6 @@ public class MainActivity extends AppCompatActivity {
     private void addToArray() {
         List<Movie> movieList = appDb.getMovieDao().getAll();
         String stringBuilder = "--->" + movieList.size();
-
-//        textViewResult.setText(stringBuilder);
-//        arrayList.add(stringBuilder);
 
         for (Movie movie : movieList) {
             arrayList.add(movie.getTitle());

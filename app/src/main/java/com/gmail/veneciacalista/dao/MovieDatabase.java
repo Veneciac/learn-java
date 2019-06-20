@@ -1,9 +1,12 @@
-package com.gmail.veneciacalista;
+package com.gmail.veneciacalista.dao;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+
+import com.gmail.veneciacalista.helper.Constants;
+import com.gmail.veneciacalista.dao.model.Movie;
 
 @Database(entities = { Movie.class }, version = 1, exportSchema = false)
 public abstract class MovieDatabase extends RoomDatabase {
