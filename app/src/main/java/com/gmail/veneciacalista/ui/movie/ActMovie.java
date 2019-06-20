@@ -1,22 +1,20 @@
-package com.gmail.veneciacalista.ui;
+package com.gmail.veneciacalista.ui.movie;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.api.MovieApi;
 import com.gmail.veneciacalista.dao.MovieDatabase;
 import com.gmail.veneciacalista.dao.model.Movie;
 import com.gmail.veneciacalista.dao.model.MovieResponse;
+import com.gmail.veneciacalista.ui.movie.adapter.MyAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,48 +23,47 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class ActMovie extends AppCompatActivity {
 
-    ListView listView;
-    RecyclerView recyclerView;
-
-//    ArrayList<Movie> arrayList = new ArrayList<>();
-    ArrayList<String> arrayList = new ArrayList<>();
-
-    private MovieDatabase movieDatabase;
-    private Movie movie;
+    private RecyclerView rvMovie;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     public static String BaseUrl = "https://api.themoviedb.org/3/";
-    private TextView textViewResult;
     MovieDatabase appDb = MovieDatabase.getInstance(this);
 
     @Override //ambil dari parent kek super
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        textViewResult = findViewById(R.id.text_view_result);
-
-        listView = (ListView)findViewById(R.id.listview);
-
-        recyclerView = (RecyclerView)findViewById(R.id.rvMovie);
-
-//        arrayList.add("hahaha");
-
-        boolean roomStatus = checkRoom();
-
-//        arrayList.add("-->" + roomStatus);
-        if (roomStatus) {
-            getMovie();
-        }
-        addToArray();
+        initToolbar();
+        initComponent();
+        setupAdapter();
+        checkRoom();
 
     }
 
-    // Menu icons are inflated just as they were with actionbar
+    private void initToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    private void initComponent() {
+        rvMovie = findViewById(R.id.rvMovie);
+    }
+
+    private void setupAdapter() {
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        rvMovie.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new MyAdapter(addToArray());
+        rvMovie.setAdapter(mAdapter);
+        rvMovie.setNestedScrollingEnabled(false);// biar g ngelag
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
-                textViewResult.setText(t.getMessage());
             }
 
         });
@@ -127,23 +123,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void addToArray() {
+    private List<Movie> addToArray() {
         List<Movie> movieList = appDb.getMovieDao().getAll();
-        String stringBuilder = "--->" + movieList.size();
 
-        for (Movie movie : movieList) {
-            arrayList.add(movie.getTitle());
-        }
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, arrayList);
-        listView.setAdapter(arrayAdapter);
+        return movieList;
     }
 
-    private boolean checkRoom() {
-        if (appDb.getMovieDao().getAll().size() != 0) {
-            return false;
-        } else {
-            return true;
+    private void checkRoom() {
+
+        if (appDb.getMovieDao().getAll().size() == 0) {
+            getMovie();
         }
     }
 }
