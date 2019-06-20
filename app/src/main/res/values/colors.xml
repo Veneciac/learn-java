@@ -3,5 +3,6 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="yellow">#FFBA4C</color>
+    <color name="yellowLight">#FFBF69</color>
+    <color name="mustard">#FF9F1C</color>
 </resources>
