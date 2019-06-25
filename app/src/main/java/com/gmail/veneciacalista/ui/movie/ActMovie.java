@@ -31,8 +31,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActMovie extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.rvMovie)
-    RecyclerView rvMovie;
+//    @BindView(R.id.rvMovie)
+//    RecyclerView rvMovie;
     @BindView(R.id.bnvHome)
     BottomNavigationView bnvHome;
     @BindView(R.id.vpHome)
@@ -142,7 +142,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
     private List<Fragment> fragments(){
         List<Fragment> list = new ArrayList<>();
         list.add(new FragNewMovie(this, "Fragment " + 0));
-        list.add(new FragNewMovie(this, "Fragment " + 1));
+        list.add(new FragMenu(this, "menuuuuu"));
         list.add(new FragNewMovie(this, "Fragment " + 2));
         return list;
     }
