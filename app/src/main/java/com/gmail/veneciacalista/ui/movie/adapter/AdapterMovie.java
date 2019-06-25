@@ -14,18 +14,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder> {
 
     private List<Movie> mDataset;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MyAdapter(List<Movie> myDataset) {
+    public AdapterMovie(List<Movie> myDataset) {
         mDataset = myDataset;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdapterMovie.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie, parent, false);
         MyViewHolder vh = new MyViewHolder(v);

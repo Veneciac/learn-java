@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.Home.ActHome" android:exported="true" />
+        <activity android:name=".ui.dashboard.ActDashboard" />
     </application>
 
 
