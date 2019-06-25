@@ -137,6 +137,21 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
         bnvHome.setOnNavigationItemSelectedListener(this);
         BaseAdapterPager adapterPager = new BaseAdapterPager(getSupportFragmentManager(), fragments());
         vpHome.setAdapter(adapterPager);
+        vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                bnvHome.getMenu().getItem(position).setChecked(true);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     private List<Fragment> fragments(){

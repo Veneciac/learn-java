@@ -28,7 +28,7 @@ public class FragMenu extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getActivity()).inflate(R.layout.fragment_menu, container, false);
+        return LayoutInflater.from(getActivity()).inflate(R.layout.frag_menu, container, false);
     }
 
     @Override
