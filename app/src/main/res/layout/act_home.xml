@@ -17,6 +17,11 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"/>
 
+    <!--<include-->
+        <!--layout="@layout/activity_main"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp" />-->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnvHome"
         android:layout_width="match_parent"
@@ -25,6 +30,7 @@
         app:itemIconTint="@drawable/state_bnve"
         app:itemTextColor="@drawable/state_bnve"
         app:menu="@menu/navigation"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

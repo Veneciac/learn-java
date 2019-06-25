@@ -49,6 +49,7 @@ public class ActMovie extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setContentView(R.layout.act_home);
         ButterKnife.bind(this);
         initToolbar();
         checkRoom();
