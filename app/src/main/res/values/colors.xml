@@ -7,4 +7,6 @@
     <color name="mustard">#FF9F1C</color>
     <color name="lightAqua">#CBF3F0</color>
     <color name="tosca">#2EC4B6</color>
+    <color name="colorNavIcon">#dae9f6</color>
+    <color name="colorNavText">#01294b</color>
 </resources>
