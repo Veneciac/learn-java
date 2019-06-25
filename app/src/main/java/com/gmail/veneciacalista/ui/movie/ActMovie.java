@@ -5,8 +5,6 @@ import android.view.Menu;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +14,6 @@ import com.gmail.veneciacalista.dao.MovieDatabase;
 import com.gmail.veneciacalista.dao.model.Movie;
 import com.gmail.veneciacalista.dao.model.MovieResponse;
 import com.gmail.veneciacalista.ui.movie.adapter.MyAdapter;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 
@@ -30,14 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActMovie extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.rvMovie)
     RecyclerView rvMovie;
-    @BindView(R.id.nav_view)
-    NavigationView navView;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
+
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -51,15 +43,11 @@ public class ActMovie extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setContentView(R.layout.act_home);
         ButterKnife.bind(this);
-        initToolbar();
         checkRoom();
         setupAdapter();
 
     }
 
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
