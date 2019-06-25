@@ -10,8 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
+import com.gmail.veneciacalista.dao.MovieDatabase;
+import com.gmail.veneciacalista.ui.movie.adapter.AdapterMovie;
 
 import butterknife.ButterKnife;
 
@@ -19,6 +23,9 @@ public class FragNewMovie extends Fragment {
 
     private final Activity act;
     private final String number;
+
+    RecyclerView rvMovie;
+    MovieDatabase appDb;
 
     public FragNewMovie(Activity act, String number) {
         this.number = number;
@@ -35,7 +42,7 @@ public class FragNewMovie extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(act);
-        setupAdapter();
+        setupAdapter(view);
         setComponent(view);
     }
 
@@ -44,7 +51,15 @@ public class FragNewMovie extends Fragment {
         tvText.setText(number);
     }
 
-    private void setupAdapter() {
+    private void setupAdapter(View view) {
+        RecyclerView recyclerView = view.findViewById(R.id.rvMovie);
+        recyclerView.setLayoutManager(new LinearLayoutManager(act));
+        appDb = MovieDatabase.getInstance(act);
+        AdapterMovie mAdapter = new AdapterMovie(appDb.getMovieDao().getAll());
+
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setNestedScrollingEnabled(false); // biar g ngelag
+
 //        AdapterMovie mAdapter = new AdapterMovie(());
 //        rvNewMovie.setAdapter();
     }

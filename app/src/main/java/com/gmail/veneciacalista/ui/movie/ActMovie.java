@@ -118,7 +118,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
         });
     }
 
-    private List<Movie> addToArray() {
+    public List<Movie> addToArray() {
         return appDb.getMovieDao().getAll();
     }
 
@@ -126,11 +126,11 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
 //        // use a linear layout manager
 //        layoutManager = new LinearLayoutManager(this);
 //        rvMovie.setLayoutManager(layoutManager);
-//
-//        // specify an adapter (see also next example)
+////
+////        // specify an adapter (see also next example)
 //        mAdapter = new AdapterMovie(addToArray());
 //        rvMovie.setAdapter(mAdapter);
-//        rvMovie.setNestedScrollingEnabled(false);// biar g ngelag
+//        rvMovie.setNestedScrollingEnabled(false); // biar g ngelag
 
 
         // View Pager Adapter
