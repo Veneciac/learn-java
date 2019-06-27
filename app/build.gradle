@@ -41,7 +41,11 @@ dependencies {
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //Butterknife
+    //Butter knife
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    //grid layout
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
 }

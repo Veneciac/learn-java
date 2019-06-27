@@ -48,7 +48,7 @@ public class FragNewMovie extends Fragment {
 
     private void setComponent(View view) {
         TextView tvText = view.findViewById(R.id.tvText);
-        tvText.setText(number);
+        tvText.setText("size movie array " + appDb.getMovieDao().getAll().size());
     }
 
     private void setupAdapter(View view) {
@@ -59,8 +59,5 @@ public class FragNewMovie extends Fragment {
 
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false); // biar g ngelag
-
-//        AdapterMovie mAdapter = new AdapterMovie(());
-//        rvNewMovie.setAdapter();
     }
 }

@@ -1,13 +1,15 @@
 package com.gmail.veneciacalista.ui.movie;
 
+import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.gmail.veneciacalista.R;
@@ -31,15 +33,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ActMovie extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-//    @BindView(R.id.rvMovie)
-//    RecyclerView rvMovie;
     @BindView(R.id.bnvHome)
     BottomNavigationView bnvHome;
     @BindView(R.id.vpHome)
     ViewPager vpHome;
-
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     public static String BaseUrl = "https://api.themoviedb.org/3/";
     MovieDatabase appDb;
@@ -83,6 +80,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.code() == 200) {
+
                     MovieResponse movieResponse = response.body();
                     assert movieResponse != null;
 
@@ -113,6 +111,8 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
 
             @Override
             public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
+
+                Log.e("error get movie", "order eeeeeeeeeeeee ");
             }
 
         });
@@ -123,16 +123,6 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
     }
 
     private void setupAdapter() {
-//        // use a linear layout manager
-//        layoutManager = new LinearLayoutManager(this);
-//        rvMovie.setLayoutManager(layoutManager);
-////
-////        // specify an adapter (see also next example)
-//        mAdapter = new AdapterMovie(addToArray());
-//        rvMovie.setAdapter(mAdapter);
-//        rvMovie.setNestedScrollingEnabled(false); // biar g ngelag
-
-
         // View Pager Adapter
         bnvHome.setOnNavigationItemSelectedListener(this);
         BaseAdapterPager adapterPager = new BaseAdapterPager(getSupportFragmentManager(), fragments());
@@ -155,9 +145,16 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
     }
 
     private List<Fragment> fragments(){
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
         List<Fragment> list = new ArrayList<>();
         list.add(new FragNewMovie(this, "Fragment " + 0));
-        list.add(new FragMenu(this, "menuuuuu"));
+        list.add(new FragMenu(this, width, height));
         list.add(new FragNewMovie(this, "Fragment " + 2));
         return list;
     }
