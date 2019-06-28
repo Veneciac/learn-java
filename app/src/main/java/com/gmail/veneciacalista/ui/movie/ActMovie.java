@@ -1,23 +1,26 @@
 package com.gmail.veneciacalista.ui.movie;
 
+import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.api.MovieApi;
+import com.gmail.veneciacalista.base.adapter.BaseAdapterPager;
 import com.gmail.veneciacalista.dao.MovieDatabase;
 import com.gmail.veneciacalista.dao.model.Movie;
 import com.gmail.veneciacalista.dao.model.MovieResponse;
-import com.gmail.veneciacalista.ui.movie.adapter.MyAdapter;
-import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,19 +31,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ActMovie extends AppCompatActivity {
+public class ActMovie extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.rvMovie)
-    RecyclerView rvMovie;
-    @BindView(R.id.nav_view)
-    NavigationView navView;
-    @BindView(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
-
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    @BindView(R.id.bnvHome)
+    BottomNavigationView bnvHome;
+    @BindView(R.id.vpHome)
+    ViewPager vpHome;
 
     public static String BaseUrl = "https://api.themoviedb.org/3/";
     MovieDatabase appDb;
@@ -48,18 +44,12 @@ public class ActMovie extends AppCompatActivity {
     @Override //ambil dari parent kek super
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         setContentView(R.layout.act_home);
         ButterKnife.bind(this);
-        initToolbar();
         checkRoom();
         setupAdapter();
-
     }
 
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,6 +80,7 @@ public class ActMovie extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.code() == 200) {
+
                     MovieResponse movieResponse = response.body();
                     assert movieResponse != null;
 
@@ -120,24 +111,69 @@ public class ActMovie extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
+
+                Log.e("error get movie", "order eeeeeeeeeeeee ");
             }
 
         });
     }
 
-    private List<Movie> addToArray() {
+    public List<Movie> addToArray() {
         return appDb.getMovieDao().getAll();
     }
 
     private void setupAdapter() {
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
-        rvMovie.setLayoutManager(layoutManager);
+        // View Pager Adapter
+        bnvHome.setOnNavigationItemSelectedListener(this);
+        BaseAdapterPager adapterPager = new BaseAdapterPager(getSupportFragmentManager(), fragments());
+        vpHome.setAdapter(adapterPager);
+        vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                bnvHome.getMenu().getItem(position).setChecked(true);
+            }
 
-        // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(addToArray());
-        rvMovie.setAdapter(mAdapter);
-        rvMovie.setNestedScrollingEnabled(false);// biar g ngelag
+            @Override
+            public void onPageSelected(int position) {
+            }
 
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+    private List<Fragment> fragments(){
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        List<Fragment> list = new ArrayList<>();
+        list.add(new FragNewMovie(this, "Fragment " + 0));
+        list.add(new FragMenu(this, width, height));
+        list.add(new FragNewMovie(this, "Fragment " + 2));
+        return list;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        boolean isChecked = menuItem.getItemId() == bnvHome.getSelectedItemId();
+        menuItem.setChecked(isChecked);
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_menu:
+                vpHome.setCurrentItem(0);
+                break;
+            case R.id.navigation_home:
+                vpHome.setCurrentItem(1);
+                break;
+            case R.id.navigation_inbox:
+                vpHome.setCurrentItem(2);
+                break;
+        }
+        return false;
     }
 }
