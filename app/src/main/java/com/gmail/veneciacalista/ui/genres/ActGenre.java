@@ -1,6 +1,7 @@
 package com.gmail.veneciacalista.ui.genres;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +15,15 @@ public class ActGenre extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_genre);
         ButterKnife.bind(this);
+        onGetData();
+    }
 
+    private void onGetData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            String genre = bundle.getString("horror");
+            Toast.makeText(this, genre, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
