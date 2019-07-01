@@ -111,7 +111,6 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
 
             @Override
             public void onFailure(@NonNull Call<MovieResponse> call, @NonNull Throwable t) {
-
                 Log.e("error get movie", "order eeeeeeeeeeeee ");
             }
 
