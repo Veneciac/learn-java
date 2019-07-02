@@ -21,6 +21,7 @@
         <activity android:name=".ui.Home.ActHome" android:exported="true" />
         <activity android:name=".ui.dashboard.ActDashboard" />
         <activity android:name=".ui.genres.ActGenre" />
+        <activity android:name=".ui.drama.ActDrama" />
     </application>
 
 

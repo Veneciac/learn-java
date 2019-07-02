@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
+import com.gmail.veneciacalista.ui.drama.ActDrama;
 import com.gmail.veneciacalista.ui.genres.ActGenre;
 import com.gmail.veneciacalista.ui.movie.adapter.AdapterMenu;
 
@@ -76,6 +77,10 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
                 break;
             case "Comedy":
                 Toast.makeText(act, "Comedy", Toast.LENGTH_SHORT).show();
+                break;
+            case "Drama":
+                Intent intentDrama = new Intent(getActivity(), ActDrama.class);
+                startActivity(intentDrama);
                 break;
         }
     }
