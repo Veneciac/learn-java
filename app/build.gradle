@@ -48,4 +48,8 @@ dependencies {
     //grid layout
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
+    //firebase
+    implementation 'com.google.firebase:firebase-config:18.0.0'
+
+
 }
