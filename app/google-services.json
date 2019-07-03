@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "984314813259",
+    "firebase_url": "https://test-77cc1.firebaseio.com",
+    "project_id": "test-77cc1",
+    "storage_bucket": "test-77cc1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984314813259:android:ca11d3c76f49aedb",
+        "android_client_info": {
+          "package_name": "com.gmail.veneciacalista"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "984314813259-dgsigf6c1vpti7vejl63m3fucalaqap8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gmail.veneciacalista",
+            "certificate_hash": "369800de581402400e332caa91717cde7a4b7414"
+          }
+        },
+        {
+          "client_id": "984314813259-kaf30lct1i155e90vc1t9foppgjjqmn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJjSq8PDPuhi6NjBkpIAE_3mppCSMqxt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "984314813259-kaf30lct1i155e90vc1t9foppgjjqmn1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
