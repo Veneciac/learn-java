@@ -1,7 +1,6 @@
 package com.gmail.veneciacalista.ui.drama.adapter;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,9 +52,8 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
 
         void setView(MoviesBean movies) {
 
-            textDrama.setText(movies.getTitle());
-            cvDrama.setBackgroundColor(Color.parseColor(movies.getBg_color()));
-            Log.d("COLOR", movies.getTitle() + " " + movies.getBg_color());
+            textDrama.setText(movies.getTitle() + " " + movies.getBg_color());
+            cvDrama.setCardBackgroundColor(Color.parseColor(movies.getBg_color()));
         }
     }
 

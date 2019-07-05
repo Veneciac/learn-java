@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.firebase.response.ListBean;
 import com.gmail.veneciacalista.firebase.response.Response;
-import com.gmail.veneciacalista.ui.drama.adapter.bigAdapter;
+import com.gmail.veneciacalista.ui.drama.adapter.BigAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
@@ -43,7 +43,7 @@ public class ActDrama extends AppCompatActivity {
     private void setupAdapter() {
         RecyclerView recyclerView = findViewById(R.id.rvDramaBig);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        bigAdapter mAdapter = new bigAdapter(genreList);
+        BigAdapter mAdapter = new BigAdapter(genreList);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false);
     }
@@ -72,7 +72,6 @@ public class ActDrama extends AppCompatActivity {
         mFirebaseRemoteConfig.setDefaults(map);
         FirebaseRemoteConfigValue m = mFirebaseRemoteConfig.getValue("genre_list");
         Response json = new Gson().fromJson(m.asString(), Response.class);
-//        Log.d("Firebase is fetching", new Gson().toJson(json));
 
         if (json != null ) {
             Log.d("Firebase !!!!!!!!!", " " + json.getList().size());

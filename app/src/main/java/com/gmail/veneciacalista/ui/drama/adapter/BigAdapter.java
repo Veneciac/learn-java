@@ -14,22 +14,22 @@ import com.gmail.veneciacalista.firebase.response.ListBean;
 
 import java.util.List;
 
-public class bigAdapter extends RecyclerView.Adapter<bigAdapter.MyViewHolder> {
+public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
 
     private List<ListBean> mDataset;
-    public bigAdapter(List<ListBean> myDataset) {
+    public BigAdapter(List<ListBean> myDataset) {
         mDataset = myDataset;
     }
 
     @Override
-    public bigAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BigAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_drama, parent, false);
         MyViewHolder vh = new MyViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull bigAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BigAdapter.MyViewHolder holder, int position) {
         holder.setView(mDataset.get(position));
     }
 
