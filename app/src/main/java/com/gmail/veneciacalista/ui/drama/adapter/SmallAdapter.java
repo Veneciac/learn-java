@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.firebase.response.MoviesBean;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,17 +45,27 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textDrama;
         CardView cvDrama;
+        ImageView ivMovie;
 
         MyViewHolder(View v) {
             super(v);
             textDrama = v.findViewById(R.id.textDrama);
             cvDrama = v.findViewById(R.id.cvDrama);
+            ivMovie = v.findViewById(R.id.ivMovie);
+
         }
 
         void setView(MoviesBean movies) {
 
-            textDrama.setText(movies.getTitle() + " " + movies.getBg_color());
+            textDrama.setText(movies.getTitle());
             cvDrama.setCardBackgroundColor(Color.parseColor(movies.getBg_color()));
+
+            try {
+
+                Picasso.get().load(movies.getImg_url()).into(ivMovie);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
