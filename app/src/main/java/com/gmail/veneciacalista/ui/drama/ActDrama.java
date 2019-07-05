@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
+import com.gmail.veneciacalista.firebase.response.ListBean;
 import com.gmail.veneciacalista.firebase.response.Response;
 import com.gmail.veneciacalista.ui.drama.adapter.bigAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,23 +29,21 @@ import butterknife.ButterKnife;
 public class ActDrama extends AppCompatActivity {
     public List<String> movieList = new ArrayList<>();
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    public List<ListBean> genreList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_drama);
         ButterKnife.bind(this);
-        setupAdapter();
         setUpFirebase();
+        setupAdapter();
     }
 
     private void setupAdapter() {
         RecyclerView recyclerView = findViewById(R.id.rvDramaBig);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        for (int i = 1; i <= 4; i++) {
-            movieList.add("item  " + i );
-        }
-        bigAdapter mAdapter = new bigAdapter(movieList);
+        bigAdapter mAdapter = new bigAdapter(genreList);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false);
     }
@@ -59,12 +58,9 @@ public class ActDrama extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             boolean updated = task.getResult();
                             Log.d("taggg", "Config params updated: " + updated);
-                            Toast.makeText(ActDrama.this, "Fetch and activate succeeded",
-                                    Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(ActDrama.this, "Fetch and activate succeeded", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(ActDrama.this, "Fetch failed",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ActDrama.this, "Fetch failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -76,8 +72,17 @@ public class ActDrama extends AppCompatActivity {
         mFirebaseRemoteConfig.setDefaults(map);
         FirebaseRemoteConfigValue m = mFirebaseRemoteConfig.getValue("genre_list");
         Response json = new Gson().fromJson(m.asString(), Response.class);
-        Log.d("Firebase is fetching", new Gson().toJson(json));
+//        Log.d("Firebase is fetching", new Gson().toJson(json));
+
+        if (json != null ) {
+            Log.d("Firebase !!!!!!!!!", " " + json.getList().size());
+            for (int i = 0 ; i < json.getList().size(); i++) {
+                genreList.add(json.getList().get(i));
+                Log.d("GENRE " + i , json.getList().get(i).getMovies().get(0).getTitle());
+            }
+
+        } else {
+            Log.e("JSON ", "NULL!!!!!!");
+        }
     }
-
-
 }

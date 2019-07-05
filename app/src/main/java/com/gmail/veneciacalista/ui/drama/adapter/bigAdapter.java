@@ -3,20 +3,21 @@ package com.gmail.veneciacalista.ui.drama.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
+import com.gmail.veneciacalista.firebase.response.ListBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class bigAdapter  extends RecyclerView.Adapter<bigAdapter.MyViewHolder> {
+public class bigAdapter extends RecyclerView.Adapter<bigAdapter.MyViewHolder> {
 
-    private List<String> mDataset;
-    public bigAdapter(List<String> myDataset) {
+    private List<ListBean> mDataset;
+    public bigAdapter(List<ListBean> myDataset) {
         mDataset = myDataset;
     }
 
@@ -39,19 +40,18 @@ public class bigAdapter  extends RecyclerView.Adapter<bigAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvDrama;
-//        TextView t
+        TextView titleSection;
+
         MyViewHolder(View v) {
             super(v);
             rvDrama = v.findViewById(R.id.rvDramaSmall);
+            titleSection = v.findViewById(R.id.dramaSection);
         }
 
-        void setView(String menu) {
-            List<String> itemList = new ArrayList<>();
-            for (int i = 1; i <= 10; i++) {
-                itemList.add("item    " + i);
-            }
+        void setView(ListBean menu) {
+            titleSection.setText(menu.getGenre());
             rvDrama.setLayoutManager(new GridLayoutManager(rvDrama.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
-            smallAdapter mAdapter = new smallAdapter(itemList);
+            SmallAdapter mAdapter = new SmallAdapter(menu.getMovies());
             rvDrama.setAdapter(mAdapter);
             rvDrama.setNestedScrollingEnabled(false);
         }
