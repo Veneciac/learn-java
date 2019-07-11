@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,12 +31,14 @@ public class ActDrama extends AppCompatActivity {
     public List<String> movieList = new ArrayList<>();
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     public List<ListBean> genreList = new ArrayList<>();
+    private VMDrama viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_drama);
         ButterKnife.bind(this);
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(VMDrama.class);
         setUpFirebase();
         setupAdapter();
     }

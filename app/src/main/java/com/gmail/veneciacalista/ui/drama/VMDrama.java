@@ -1,4 +1,6 @@
 package com.gmail.veneciacalista.ui.drama;
 
-public class VMDrama {
+import androidx.lifecycle.ViewModel;
+
+public class VMDrama extends ViewModel {
 }
