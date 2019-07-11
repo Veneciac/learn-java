@@ -31,6 +31,8 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
     private final Integer height;
     public List<String> menuList = new ArrayList<>();
 
+//    ViewDialog viewDialog;
+
     public FragMenu(Activity act, Integer width, Integer height) {
         this.act = act;
         this.width = width;
@@ -48,6 +50,7 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(act);
         setupAdapter(view);
+//        viewDialog = new ViewDialog(act);
     }
 
 
@@ -82,6 +85,9 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
                 Intent intentDrama = new Intent(getActivity(), ActDrama.class);
                 startActivity(intentDrama);
                 break;
+//            case "Romance":
+//                ViewDialog.showDialog();
+//                break;
         }
     }
 }

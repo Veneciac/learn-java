@@ -18,6 +18,7 @@ import com.gmail.veneciacalista.base.adapter.BaseAdapterPager;
 import com.gmail.veneciacalista.dao.MovieDatabase;
 import com.gmail.veneciacalista.dao.model.Movie;
 import com.gmail.veneciacalista.dao.model.MovieResponse;
+import com.gmail.veneciacalista.ui.dialog.ViewDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
     @BindView(R.id.vpHome)
     ViewPager vpHome;
 
+    ViewDialog viewDialog;
     public static String BaseUrl = "https://api.themoviedb.org/3/";
     MovieDatabase appDb;
 
@@ -47,13 +49,14 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
         setContentView(R.layout.act_home);
         ButterKnife.bind(this);
         checkRoom();
+        viewDialog = new ViewDialog(this);
+//        viewDialog.showDialog();
         setupAdapter();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the Menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

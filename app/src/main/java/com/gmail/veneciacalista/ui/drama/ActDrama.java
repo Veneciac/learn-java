@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.firebase.response.ListBean;
 import com.gmail.veneciacalista.firebase.response.Response;
+import com.gmail.veneciacalista.ui.dialog.ViewDialog;
 import com.gmail.veneciacalista.ui.drama.adapter.BigAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,17 +34,25 @@ public class ActDrama extends AppCompatActivity {
     public List<ListBean> genreList = new ArrayList<>();
     private VMDrama viewModel;
 
+    ViewDialog viewDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_drama);
         ButterKnife.bind(this);
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(VMDrama.class);
+        viewDialog = new ViewDialog(this);
+        viewDialog.showDialog();
         setUpFirebase();
         setupAdapter();
+
+//        ProgressDialog dialog = ProgressDialog.show(ActDrama.this, "",
+//                "Loading. Please wait...");
     }
 
     private void setupAdapter() {
+//        showDialog(5);
         RecyclerView recyclerView = findViewById(R.id.rvDramaBig);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         BigAdapter mAdapter = new BigAdapter(genreList);
@@ -61,7 +70,15 @@ public class ActDrama extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             boolean updated = task.getResult();
                             Log.d("taggg", "Config params updated: " + updated);
-                            Toast.makeText(ActDrama.this, "Fetch and activate succeeded", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ActDrama.this, "Fetch and activate succeeded", Toast.LENGTH_SHORT).show();
+//                            viewDialog.hideDialog();
+                            new android.os.Handler().postDelayed(
+                                    new Runnable() {
+                                        public void run() {
+                                            viewDialog.hideDialog();
+                                        }
+                                    },
+                        2000);
                         } else {
                             Toast.makeText(ActDrama.this, "Fetch failed", Toast.LENGTH_SHORT).show();
                         }

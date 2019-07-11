@@ -1,4 +1,4 @@
-package com.gmail.veneciacalista.ui;
+package com.gmail.veneciacalista.ui.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
