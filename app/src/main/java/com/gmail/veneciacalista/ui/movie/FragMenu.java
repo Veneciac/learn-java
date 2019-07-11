@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,7 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
     private final Integer height;
     public List<String> menuList = new ArrayList<>();
 
-//    ViewDialog viewDialog;
+    FrameLayout flBottomSheet;
 
     public FragMenu(Activity act, Integer width, Integer height) {
         this.act = act;
@@ -42,6 +43,7 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LayoutInflater.from(getActivity()).inflate(R.layout.bottom_sheet, container, false);
         return LayoutInflater.from(getActivity()).inflate(R.layout.frag_menu, container, false);
     }
 
@@ -50,7 +52,7 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(act);
         setupAdapter(view);
-//        viewDialog = new ViewDialog(act);
+//        displayBottomSheet(view);
     }
 
 
@@ -70,6 +72,7 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
         recyclerView.setNestedScrollingEnabled(false); // biar g ngelag
     }
 
+
     @Override
     public void onClickMenu(int position) {
         switch (menuList.get(position)){
@@ -85,9 +88,8 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
                 Intent intentDrama = new Intent(getActivity(), ActDrama.class);
                 startActivity(intentDrama);
                 break;
-//            case "Romance":
-//                ViewDialog.showDialog();
-//                break;
+            case "Romance":
+                break;
         }
     }
 }

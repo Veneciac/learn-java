@@ -52,7 +52,6 @@ public class ActDrama extends AppCompatActivity {
     }
 
     private void setupAdapter() {
-//        showDialog(5);
         RecyclerView recyclerView = findViewById(R.id.rvDramaBig);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         BigAdapter mAdapter = new BigAdapter(genreList);
