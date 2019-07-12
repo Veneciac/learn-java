@@ -71,13 +71,7 @@ public class ActDrama extends AppCompatActivity {
                             Log.d("taggg", "Config params updated: " + updated);
 //                            Toast.makeText(ActDrama.this, "Fetch and activate succeeded", Toast.LENGTH_SHORT).show();
 //                            viewDialog.hideDialog();
-                            new android.os.Handler().postDelayed(
-                                    new Runnable() {
-                                        public void run() {
-                                            viewDialog.hideDialog();
-                                        }
-                                    },
-                        2000);
+
                         } else {
                             Toast.makeText(ActDrama.this, "Fetch failed", Toast.LENGTH_SHORT).show();
                         }
@@ -86,6 +80,7 @@ public class ActDrama extends AppCompatActivity {
     }
 
     private void defaultKey() {
+
         Map<String, Object> map = new HashMap<>();
         map.put("genre_list", "");
         mFirebaseRemoteConfig.setDefaults(map);
@@ -93,6 +88,8 @@ public class ActDrama extends AppCompatActivity {
         Response json = new Gson().fromJson(m.asString(), Response.class);
 
         if (json != null ) {
+            viewDialog.hideDialog();
+//            Toast.makeText(ActDrama.this, "AHHHHHHHHHHHHHHHHHHH", Toast.LENGTH_SHORT).show();
             Log.d("Firebase !!!!!!!!!", " " + json.getList().size());
             for (int i = 0 ; i < json.getList().size(); i++) {
                 genreList.add(json.getList().get(i));
@@ -100,6 +97,11 @@ public class ActDrama extends AppCompatActivity {
             }
 
         } else {
+//            finish();
+            overridePendingTransition(0, 0);
+            this.recreate();
+            overridePendingTransition(0, 0);
+//            Toast.makeText(ActDrama.this, "NOOOOOOOOOOOOOOOO", Toast.LENGTH_SHORT).show();
             Log.e("JSON ", "NULL!!!!!!");
         }
     }
