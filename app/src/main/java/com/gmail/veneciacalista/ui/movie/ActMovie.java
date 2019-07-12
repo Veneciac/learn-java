@@ -62,7 +62,10 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
     }
 
     private void checkRoom() {
-        if (appDb == null) appDb = MovieDatabase.getInstance(this);
+        if (appDb != null) {
+            MovieDatabase.getInstance(this).cleanUp();
+        }
+        appDb = MovieDatabase.getInstance(this);
         if (appDb.getMovieDao().getAll().size() == 0) {
             getMovie();
         }
