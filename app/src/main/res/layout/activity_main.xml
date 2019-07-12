@@ -5,37 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
-    <!--<androidx.drawerlayout.widget.DrawerLayout-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:id="@+id/drawer_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:openDrawer="start">-->
-
-        <!--<com.google.android.material.navigation.NavigationView-->
-            <!--android:id="@+id/nav_view"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="start"-->
-            <!--app:headerLayout="@layout/nav_header_main"-->
-            <!--app:Menu="@Menu/activity_main_drawer" />-->
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical">-->
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvMovie"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-        <!--</LinearLayout>-->
-
-
-    <!--</androidx.drawerlayout.widget.DrawerLayout>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMovie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </LinearLayout>

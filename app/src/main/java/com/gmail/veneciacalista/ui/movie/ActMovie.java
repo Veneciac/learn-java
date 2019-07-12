@@ -43,7 +43,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
     public static String BaseUrl = "https://api.themoviedb.org/3/";
     MovieDatabase appDb;
 
-    @Override //ambil dari parent kek super
+    @Override // ==> ambil dari parent kek super
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_home);
@@ -63,6 +63,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
 
     private void checkRoom() {
         if (appDb != null) {
+            // necessary ?
             MovieDatabase.getInstance(this).cleanUp();
         }
         appDb = MovieDatabase.getInstance(this);
@@ -121,10 +122,6 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
             }
 
         });
-    }
-
-    public List<Movie> addToArray() {
-        return appDb.getMovieDao().getAll();
     }
 
     private void setupAdapter() {

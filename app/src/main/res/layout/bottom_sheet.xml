@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true">
 
     <FrameLayout
         android:id="@+id/fLBottomSheet"
@@ -21,7 +22,7 @@
             android:text="BOTTOM SHEET"
             android:textAlignment="center"
             android:textSize="25sp"
-            android:textColor="@color/lightGrey"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
             />
 
 
