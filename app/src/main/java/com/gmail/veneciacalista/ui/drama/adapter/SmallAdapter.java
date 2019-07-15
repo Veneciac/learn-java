@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.firebase.response.MoviesBean;
 import com.gmail.veneciacalista.ui.movieDetail.ActMovieDetail;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -72,12 +73,8 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
             ivMovie.setOnClickListener(v -> {
 
                 Intent movieDetail = new Intent(v.getContext(), ActMovieDetail.class);
-                movieDetail.putExtra("title", movies.getTitle());
-                movieDetail.putExtra("image", movies.getImg_url());
-                movieDetail.putExtra("overview", movies.getOver_view());
-                movieDetail.putExtra("rating", movies.getRating());
+                movieDetail.putExtra("movie", new Gson().toJson(movies));
                 v.getContext().startActivity(movieDetail);
-
 
             });
         }

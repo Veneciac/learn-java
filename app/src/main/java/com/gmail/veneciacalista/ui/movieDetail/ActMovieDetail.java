@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
+import com.gmail.veneciacalista.firebase.response.MoviesBean;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -48,17 +50,15 @@ public class ActMovieDetail extends AppCompatActivity {
     }
 
     private void setUpAdapter () {
-        String title = getIntent().getStringExtra("title");
-        String image = getIntent().getStringExtra("image");
-        String overview = getIntent().getStringExtra("overview");
-        String rating = getIntent().getStringExtra("rating");
+        MoviesBean movie = new Gson().fromJson(getIntent().getStringExtra("movie"), MoviesBean.class);
+
         try {
-            Picasso.get().load(image).into(ivMoviedetail);
+            Picasso.get().load(movie.getImg_url()).into(ivMoviedetail);
         } catch (Exception e){
             e.printStackTrace();
         }
-        tvMovieDTitle.setText(title);
-        tvMovieDOverview.setText(overview);
+        tvMovieDTitle.setText(movie.getTitle());
+        tvMovieDOverview.setText(movie.getOver_view());
     }
 
 
