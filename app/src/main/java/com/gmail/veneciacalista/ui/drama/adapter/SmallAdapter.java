@@ -20,6 +20,7 @@ import java.util.List;
 public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder> {
 
     private List<MoviesBean> mDataset;
+    private MovieListener listener;
 
     public SmallAdapter(List<MoviesBean> myDataset) {
         mDataset = myDataset;
@@ -34,6 +35,10 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SmallAdapter.MyViewHolder holder, int position) {
+
+        holder.cvDrama.setOnClickListener(v -> {
+            if (listener != null) listener.onClickMenu(position);
+        });
         holder.setView(mDataset.get(position));
     }
 
@@ -67,6 +72,13 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
                 e.printStackTrace();
             }
         }
+    }
+    public void setListener(MovieListener listener) {
+        this.listener = listener;
+    }
+
+    public interface MovieListener {
+        void onClickMenu(int position);
     }
 
 }

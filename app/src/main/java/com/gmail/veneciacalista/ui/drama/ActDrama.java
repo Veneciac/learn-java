@@ -93,7 +93,7 @@ public class ActDrama extends AppCompatActivity {
             Log.d("Firebase !!!!!!!!!", " " + json.getList().size());
             for (int i = 0 ; i < json.getList().size(); i++) {
                 genreList.add(json.getList().get(i));
-                Log.d("GENRE " + i , json.getList().get(i).getMovies().get(0).getTitle());
+//                Log.d("GENRE " + i , json.getList().get(i).getMovies().get(0).getTitle());
             }
 
         } else {

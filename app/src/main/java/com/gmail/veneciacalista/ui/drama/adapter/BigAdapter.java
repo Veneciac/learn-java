@@ -17,6 +17,7 @@ import java.util.List;
 public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
 
     private List<ListBean> mDataset;
+
     public BigAdapter(List<ListBean> myDataset) {
         mDataset = myDataset;
     }
@@ -38,7 +39,7 @@ public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
         return mDataset.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements SmallAdapter.MovieListener {
         RecyclerView rvDrama;
         TextView titleSection;
 
@@ -52,8 +53,14 @@ public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
             titleSection.setText(menu.getGenre());
             rvDrama.setLayoutManager(new GridLayoutManager(rvDrama.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
             SmallAdapter mAdapter = new SmallAdapter(menu.getMovies());
+            mAdapter.setListener(this);
             rvDrama.setAdapter(mAdapter);
             rvDrama.setNestedScrollingEnabled(false);
+        }
+
+        @Override
+        public void onClickMenu(int position) {
+           
         }
     }
 
