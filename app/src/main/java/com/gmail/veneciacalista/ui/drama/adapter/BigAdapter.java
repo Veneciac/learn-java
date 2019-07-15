@@ -39,7 +39,7 @@ public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
         return mDataset.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements SmallAdapter.MovieListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvDrama;
         TextView titleSection;
 
@@ -53,15 +53,17 @@ public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
             titleSection.setText(menu.getGenre());
             rvDrama.setLayoutManager(new GridLayoutManager(rvDrama.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
             SmallAdapter mAdapter = new SmallAdapter(menu.getMovies());
-            mAdapter.setListener(this);
+//            mAdapter.setListener(this);
             rvDrama.setAdapter(mAdapter);
             rvDrama.setNestedScrollingEnabled(false);
         }
 
-        @Override
-        public void onClickMenu(int position) {
-           
-        }
+//        @Override
+//        public void onClickMenu(int position) {
+//            Intent movieDetail = new Intent(rvDrama.getContext(), ActMovieDetail.class);
+//            movieDetail.putExtra("movie", (Parcelable) mDataset.get(position));
+//            rvDrama.getContext().startActivity(movieDetail);
+//        }
     }
 
 }

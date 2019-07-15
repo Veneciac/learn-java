@@ -1,5 +1,6 @@
 package com.gmail.veneciacalista.ui.drama.adapter;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.firebase.response.MoviesBean;
+import com.gmail.veneciacalista.ui.movieDetail.ActMovieDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,7 +22,6 @@ import java.util.List;
 public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder> {
 
     private List<MoviesBean> mDataset;
-    private MovieListener listener;
 
     public SmallAdapter(List<MoviesBean> myDataset) {
         mDataset = myDataset;
@@ -35,10 +36,6 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SmallAdapter.MyViewHolder holder, int position) {
-
-        holder.cvDrama.setOnClickListener(v -> {
-            if (listener != null) listener.onClickMenu(position);
-        });
         holder.setView(mDataset.get(position));
     }
 
@@ -71,14 +68,19 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
             } catch (Exception e){
                 e.printStackTrace();
             }
-        }
-    }
-    public void setListener(MovieListener listener) {
-        this.listener = listener;
-    }
+            ivMovie.setClickable(true);
+            ivMovie.setOnClickListener(v -> {
 
-    public interface MovieListener {
-        void onClickMenu(int position);
+                Intent movieDetail = new Intent(v.getContext(), ActMovieDetail.class);
+                movieDetail.putExtra("title", movies.getTitle());
+                movieDetail.putExtra("image", movies.getImg_url());
+                movieDetail.putExtra("overview", movies.getOver_view());
+                movieDetail.putExtra("rating", movies.getRating());
+                v.getContext().startActivity(movieDetail);
+
+
+            });
+        }
     }
 
 }

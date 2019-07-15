@@ -13,4 +13,7 @@
     <color name="black">#0f0f0f</color>
     <color name="dustySalmon">#CD5C5C</color>
     <color name="dustyPastelTosca">#5F9EA0</color>
+    <color name="crimsonRed">#E50914</color>
+    <color name="grey">#757575</color>
+    <color name="medDarkGrey">#424242</color>
 </resources>

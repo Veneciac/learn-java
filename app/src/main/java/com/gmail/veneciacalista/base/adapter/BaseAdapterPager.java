@@ -1,16 +1,16 @@
 package com.gmail.veneciacalista.base.adapter;
 
+import android.util.SparseArray;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import java.util.List;
-
 public class BaseAdapterPager extends FragmentPagerAdapter {
 
-    private final List<Fragment> fragments;
+    private final SparseArray<Fragment> fragments;
 
-    public BaseAdapterPager(FragmentManager fm, List<Fragment> fragments) {
+    public BaseAdapterPager(FragmentManager fm, SparseArray<Fragment> fragments) {
         super(fm);
         this.fragments = fragments;
     }

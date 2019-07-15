@@ -3,6 +3,7 @@ package com.gmail.veneciacalista.ui.movie;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,9 +21,6 @@ import com.gmail.veneciacalista.dao.model.Movie;
 import com.gmail.veneciacalista.dao.model.MovieResponse;
 import com.gmail.veneciacalista.ui.dialog.ViewDialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -146,7 +144,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
         });
     }
 
-    private List<Fragment> fragments(){
+    private SparseArray<Fragment> fragments(){
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -154,10 +152,10 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
         int width = size.x;
         int height = size.y;
 
-        List<Fragment> list = new ArrayList<>();
-        list.add(new FragNewMovie(this, "Fragment " + 0));
-        list.add(new FragMenu(this, width, height));
-        list.add(new FragNewMovie(this, "Fragment " + 2));
+        SparseArray<Fragment> list = new SparseArray<>();
+        list.put(0, new FragNewMovie(this, "Fragment " + 0));
+        list.put(1, new FragMenu(this, width, height));
+        list.put(2, new FragNewMovie(this, "Fragment " + 2));
         return list;
     }
 
