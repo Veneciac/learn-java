@@ -32,8 +32,6 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
     private final Integer height;
     public List<String> menuList = new ArrayList<>();
 
-    FrameLayout flBottomSheet;
-
     public FragMenu(Activity act, Integer width, Integer height) {
         this.act = act;
         this.width = width;
@@ -52,7 +50,6 @@ public class FragMenu extends Fragment implements AdapterMenu.MenuListener {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(act);
         setupAdapter(view);
-//        displayBottomSheet(view);
     }
 
 

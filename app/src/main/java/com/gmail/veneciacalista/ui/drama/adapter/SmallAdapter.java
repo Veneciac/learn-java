@@ -1,6 +1,6 @@
 package com.gmail.veneciacalista.ui.drama.adapter;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.firebase.response.MoviesBean;
-import com.gmail.veneciacalista.ui.movieDetail.ActMovieDetail;
-import com.google.gson.Gson;
+import com.gmail.veneciacalista.ui.drama.FragMovieDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,9 +23,11 @@ import java.util.List;
 public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder> {
 
     private List<MoviesBean> mDataset;
+    private static Activity activity;
 
-    public SmallAdapter(List<MoviesBean> myDataset) {
+    public SmallAdapter(List<MoviesBean> myDataset, Activity act) {
         mDataset = myDataset;
+        activity = act;
     }
 
     @Override
@@ -59,7 +61,6 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
         }
 
         void setView(MoviesBean movies) {
-
             textDrama.setText(movies.getTitle());
             cvDrama.setCardBackgroundColor(Color.parseColor(movies.getBg_color()));
 
@@ -71,11 +72,11 @@ public class SmallAdapter extends RecyclerView.Adapter<SmallAdapter.MyViewHolder
             }
             ivMovie.setClickable(true);
             ivMovie.setOnClickListener(v -> {
-
-                Intent movieDetail = new Intent(v.getContext(), ActMovieDetail.class);
-                movieDetail.putExtra("movie", new Gson().toJson(movies));
-                v.getContext().startActivity(movieDetail);
-
+               FragMovieDetail bottomSheet = new FragMovieDetail(activity ,movies);
+               bottomSheet.show(((FragmentActivity)activity).getSupportFragmentManager(), bottomSheet.getTag());
+//                Intent movieDetail = new Intent(v.getContext(), ActMovieDetail.class);
+//                movieDetail.putExtra("movie", new Gson().toJson(movies));
+//                v.getContext().startActivity(movieDetail);
             });
         }
     }

@@ -1,7 +1,6 @@
 package com.gmail.veneciacalista.ui.movieDetail;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,13 +39,7 @@ public class ActMovieDetail extends AppCompatActivity {
         setContentView(R.layout.act_movie_detail);
         ButterKnife.bind(this);
         setUpAdapter();
-        btnWatch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(ActMovieDetail.this, "Sorry movies not available yet", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        btnWatch.setOnClickListener(v -> Toast.makeText(ActMovieDetail.this, "Sorry movies not available yet", Toast.LENGTH_SHORT).show());
     }
 
     private void setUpAdapter () {

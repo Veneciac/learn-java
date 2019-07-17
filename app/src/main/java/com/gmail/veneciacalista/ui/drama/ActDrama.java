@@ -29,7 +29,6 @@ import java.util.Map;
 import butterknife.ButterKnife;
 
 public class ActDrama extends AppCompatActivity {
-    public List<String> movieList = new ArrayList<>();
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     public List<ListBean> genreList = new ArrayList<>();
     private VMDrama viewModel;
@@ -54,7 +53,7 @@ public class ActDrama extends AppCompatActivity {
     private void setupAdapter() {
         RecyclerView recyclerView = findViewById(R.id.rvDramaBig);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        BigAdapter mAdapter = new BigAdapter(genreList);
+        BigAdapter mAdapter = new BigAdapter(genreList, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false);
     }

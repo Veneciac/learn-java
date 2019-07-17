@@ -1,5 +1,6 @@
 package com.gmail.veneciacalista.ui.drama.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gmail.veneciacalista.R;
 import com.gmail.veneciacalista.firebase.response.ListBean;
+import com.gmail.veneciacalista.ui.drama.ActDrama;
 
 import java.util.List;
 
 public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
 
     private List<ListBean> mDataset;
+    private Activity act;
 
-    public BigAdapter(List<ListBean> myDataset) {
+    public BigAdapter(List<ListBean> myDataset, ActDrama actDrama) {
         mDataset = myDataset;
+        act = actDrama;
     }
 
     @Override
@@ -52,7 +56,7 @@ public class BigAdapter extends RecyclerView.Adapter<BigAdapter.MyViewHolder> {
         void setView(ListBean menu) {
             titleSection.setText(menu.getGenre());
             rvDrama.setLayoutManager(new GridLayoutManager(rvDrama.getContext(), 1, GridLayoutManager.HORIZONTAL, false));
-            SmallAdapter mAdapter = new SmallAdapter(menu.getMovies());
+            SmallAdapter mAdapter = new SmallAdapter(menu.getMovies(), act);
 //            mAdapter.setListener(this);
             rvDrama.setAdapter(mAdapter);
             rvDrama.setNestedScrollingEnabled(false);
