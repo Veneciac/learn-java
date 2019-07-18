@@ -40,6 +40,9 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
     ViewDialog viewDialog;
     public static String BaseUrl = "https://api.themoviedb.org/3/";
     MovieDatabase appDb;
+    public static Boolean isLoading = false;
+    public static Integer page = 1;
+    public static String api_key = "d94b3ad2730dee34212c8f50fb87a861";
 
     @Override // ==> ambil dari parent kek super
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +64,18 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
 
     private void checkRoom() {
         if (appDb != null) {
-            // necessary ?
             MovieDatabase.getInstance(this).cleanUp();
         }
         appDb = MovieDatabase.getInstance(this);
         if (appDb.getMovieDao().getAll().size() == 0) {
             getMovie();
+//            MovieHelper.getMovie(this, page);
+
         }
+
     }
 
-    private void getMovie() {
+    public void getMovie() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BaseUrl)
@@ -78,10 +83,9 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
                 .build();
 
         MovieApi service = retrofit.create(MovieApi.class);
-        Call<MovieResponse> call = service.getMovie();
-
+        Call<MovieResponse> call = service.getMovie(api_key, page);
+        Log.e("URL ->", call.request().url() + "");
         call.enqueue(new Callback<MovieResponse>() {
-
             @Override
             public void onResponse(@NonNull Call<MovieResponse> call, @NonNull Response<MovieResponse> response) {
                 if (response.code() == 200) {
@@ -89,7 +93,10 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
                     MovieResponse movieResponse = response.body();
                     assert movieResponse != null;
 
-                    appDb.getMovieDao().delete();
+                    if (page == 1) {
+                        appDb.getMovieDao().delete();
+                    }
+
                     int i = 0;
                     for (Movie movie : movieResponse.results) {
                         i++;
@@ -111,6 +118,7 @@ public class ActMovie extends AppCompatActivity implements BottomNavigationView.
                                 )
                         );
                     }
+                    isLoading = false;
                 }
             }
 

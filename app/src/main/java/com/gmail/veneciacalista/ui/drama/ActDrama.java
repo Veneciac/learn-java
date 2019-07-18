@@ -32,7 +32,6 @@ public class ActDrama extends AppCompatActivity {
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
     public List<ListBean> genreList = new ArrayList<>();
     private VMDrama viewModel;
-
     ViewDialog viewDialog;
 
     @Override
@@ -45,18 +44,18 @@ public class ActDrama extends AppCompatActivity {
         viewDialog.showDialog();
         setUpFirebase();
         setupAdapter();
-
-//        ProgressDialog dialog = ProgressDialog.show(ActDrama.this, "",
-//                "Loading. Please wait...");
     }
 
     private void setupAdapter() {
         RecyclerView recyclerView = findViewById(R.id.rvDramaBig);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
+        recyclerView.setLayoutManager(layoutManager);
         BigAdapter mAdapter = new BigAdapter(genreList, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false);
     }
+
+
 
     private void setUpFirebase() {
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();

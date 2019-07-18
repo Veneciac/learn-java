@@ -4,8 +4,9 @@ import com.gmail.veneciacalista.dao.model.MovieResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface MovieApi {
-    @GET("movie/now_playing?api_key=d94b3ad2730dee34212c8f50fb87a861&page=1")
-    Call<MovieResponse> getMovie();
+    @GET("movie/now_playing?")
+    Call<MovieResponse> getMovie( @Query("api_key") String api_key, @Query("page") Integer page);
 }
