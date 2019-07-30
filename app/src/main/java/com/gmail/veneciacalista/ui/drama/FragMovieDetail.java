@@ -34,6 +34,12 @@ public class FragMovieDetail extends BottomSheetDialogFragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(FragMovieDetail.STYLE_NO_FRAME,0);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Button btnWatch = view.findViewById(R.id.btnWatch);
