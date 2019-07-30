@@ -55,8 +55,6 @@ public class ActDrama extends AppCompatActivity {
         recyclerView.setNestedScrollingEnabled(false);
     }
 
-
-
     private void setUpFirebase() {
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         defaultKey();
@@ -85,11 +83,11 @@ public class ActDrama extends AppCompatActivity {
         FirebaseRemoteConfigValue m = mFirebaseRemoteConfig.getValue("genre_list");
         Response json = new Gson().fromJson(m.asString(), Response.class);
 
-        if (json != null ) {
+        if (json != null) {
             viewDialog.hideDialog();
 //            Toast.makeText(ActDrama.this, "AHHHHHHHHHHHHHHHHHHH", Toast.LENGTH_SHORT).show();
             Log.d("Firebase !!!!!!!!!", " " + json.getList().size());
-            for (int i = 0 ; i < json.getList().size(); i++) {
+            for (int i = 0; i < json.getList().size(); i++) {
                 genreList.add(json.getList().get(i));
 //                Log.d("GENRE " + i , json.getList().get(i).getMovies().get(0).getTitle());
             }
